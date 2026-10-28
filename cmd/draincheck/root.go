@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -15,6 +16,18 @@ func newRootCmd(version string, run func(context.Context, options) error) *cobra
 		Version:       version,
 		SilenceUsage:  true,
 		SilenceErrors: true,
+		// feat(cli): accept node names as arguments and -l/--selector
+		// will give positional arguments a meaning later. That issue replaces
+		// this error so the two do not get tangled.
+		Args: func(cmd *cobra.Command, args []string) error {
+			if len(args) > 0 {
+				return &exitError{
+					code: exitFailure,
+					msg:  fmt.Sprintf("unexpected argument %q: name the nodes with --nodes n1,n2", args[0]),
+				}
+			}
+			return nil
+		},
 		RunE: func(c *cobra.Command, _ []string) error {
 			if err := opts.validate(); err != nil {
 				return err

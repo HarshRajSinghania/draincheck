@@ -435,7 +435,7 @@ Debug lines name files, resources, rules and nodes, and give counts. They never 
 | ---- | ----------------------------------------------------------------------- |
 | `0`  | Analysis completed; no finding at or above the `--fail-on` level.       |
 | `1`  | Analysis completed; at least one finding at or above `--fail-on`.       |
-| `2`  | draincheck could not complete: bad flags, unreadable kubeconfig, cluster unreachable, unknown node, or the run was stopped with `SIGINT` or `SIGTERM`. |
+| `2`  | draincheck could not complete: bad flags, unexpected positional argument, unreadable kubeconfig, cluster unreachable, unknown node, or the run was stopped with `SIGINT` or `SIGTERM`. |
 
 `--fail-on` picks what counts:
 
